@@ -19,4 +19,4 @@ yarn add --dev erc721psi
 ```
 
 ## Projects powered by solidity-bits
-- (erc721psi)[https://github.com/estarriolvetch/ERC721Psi]
+- [erc721psi](https://github.com/estarriolvetch/ERC721Psi)
