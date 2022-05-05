@@ -11,11 +11,11 @@ This library provides useful tools for bit tricks with solidity and gas-efficien
 ## Installaion
 ### npm
 ```
-npm install --save-dev erc721psi
+npm install --save-dev solidity-bits
 ```
 ### yarn
 ```
-yarn add --dev erc721psi
+yarn add --dev solidity-bits
 ```
 
 ## Projects powered by solidity-bits
