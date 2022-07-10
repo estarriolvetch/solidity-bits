@@ -143,6 +143,94 @@ describe('BitMap', function (accounts) {
     });
   });
 
+  describe('Batch Set', function () {
+
+    it('within a single bucket', async function () {
+      await this.bitmap.setBatch(257, 30);
+
+      let count = 0
+      for(i=0; i < 600; i++){
+        if(i < 257) {
+          assert.equal(
+            await this.bitmap.get(i), 
+            false
+          );
+        } else {
+          if(await this.bitmap.get(i)){
+            count ++;
+          }
+          
+        }
+      }
+      assert.equal(count, 30);
+    });
+
+    it('across multiple bucket', async function () {
+      await this.bitmap.setBatch(10, 512);
+
+      let count = 0
+      for(i=0; i < 600; i++){
+        if(i < 10) {
+          assert.equal(
+            await this.bitmap.get(i), 
+            false
+          );
+        } else {
+          if(await this.bitmap.get(i)){
+            count ++;
+          }
+          
+        }
+      }
+      assert.equal(count, 512);
+    });
+  });
+
+  describe('Batch Unset', function () {
+
+    it('within a single bucket', async function () {
+      await this.bitmap.setBatch(0, 600);
+      await this.bitmap.unsetBatch(257, 30);
+
+      let count = 0
+      for(i=0; i < 600; i++){
+        if(i < 257) {
+          assert.equal(
+            await this.bitmap.get(i), 
+            true
+          );
+        } else {
+          if(!(await this.bitmap.get(i))){
+            count ++;
+          }
+          
+        }
+      }
+      assert.equal(count, 30);
+    });
+
+    it('across multiple bucket', async function () {
+      await this.bitmap.setBatch(0, 600);
+      await this.bitmap.unsetBatch(10, 512);
+
+      let count = 0
+      for(i=0; i < 600; i++){
+        if(i < 10) {
+          assert.equal(
+            await this.bitmap.get(i), 
+            true
+          );
+        } else {
+          if(!(await this.bitmap.get(i))){
+            count ++;
+          }
+          
+        }
+      }
+      assert.equal(count, 512);
+    });
+  });
+
   describe('scan forward', function () {
     it('scanForward the key itself', async function () {
       await this.bitmap.set(keyA);

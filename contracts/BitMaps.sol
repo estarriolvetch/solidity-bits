@@ -30,6 +30,8 @@ import "./BitScan.sol";
 library BitMaps {
     using BitScan for uint256;
     uint256 private constant MASK_INDEX_ZERO = (1 << 255);
+    uint256 private constant MASK_FULL = type(uint256).max;
+
     struct BitMap {
         mapping(uint256 => uint256) _data;
     }
@@ -75,6 +77,63 @@ library BitMaps {
         uint256 mask = MASK_INDEX_ZERO >> (index & 0xff);
         bitmap._data[bucket] &= ~mask;
     }
+
+
+    /**
+     * @dev Consecutively sets `amount` of bits starting from the bit at `startIndex`.
+     */    
+    function setBatch(BitMap storage bitmap, uint256 startIndex, uint256 amount) internal {
+        uint256 bucket = startIndex >> 8;
+
+        uint256 bucketStartIndex = (startIndex & 0xff);
+
+        unchecked {
+            if(bucketStartIndex + amount < 256) {
+                bitmap._data[bucket] |= MASK_FULL << (256 - amount) >> bucketStartIndex;
+            } else {
+                bitmap._data[bucket] |= MASK_FULL >> bucketStartIndex;
+                amount -= (256 - bucketStartIndex);
+                bucket++;
+
+                while(amount > 256) {
+                    bitmap._data[bucket] = MASK_FULL;
+                    amount -= 256;
+                    bucket++;
+                }
+
+                bitmap._data[bucket] |= MASK_FULL << (256 - amount);
+            }
+        }
+    }
+
+
+    /**
+     * @dev Consecutively unsets `amount` of bits starting from the bit at `startIndex`.
+     */    
+    function unsetBatch(BitMap storage bitmap, uint256 startIndex, uint256 amount) internal {
+        uint256 bucket = startIndex >> 8;
+
+        uint256 bucketStartIndex = (startIndex & 0xff);
+
+        unchecked {
+            if(bucketStartIndex + amount < 256) {
+                bitmap._data[bucket] &= ~(MASK_FULL << (256 - amount) >> bucketStartIndex);
+            } else {
+                bitmap._data[bucket] &= ~(MASK_FULL >> bucketStartIndex);
+                amount -= (256 - bucketStartIndex);
+                bucket++;
+
+                while(amount > 256) {
+                    bitmap._data[bucket] = 0;
+                    amount -= 256;
+                    bucket++;
+                }
+
+                bitmap._data[bucket] &= ~(MASK_FULL << (256 - amount));
+            }
+        }
+    }
+
 
     /**
      * @dev Find the closest index of the set bit before `index`.

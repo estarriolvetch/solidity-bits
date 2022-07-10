@@ -25,6 +25,14 @@ contract BitMapMock {
         _bitmap.unset(index);
     }
 
+    function setBatch(uint256 startIndex, uint256 amount) public {
+        _bitmap.setBatch(startIndex, amount);
+    }
+
+    function unsetBatch(uint256 startIndex, uint256 amount) public {
+        _bitmap.unsetBatch(startIndex, amount);
+    }
+
     function scanForward(uint256 index) public view returns (uint256) {
         return _bitmap.scanForward(index);
     }
