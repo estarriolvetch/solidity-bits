@@ -20,3 +20,4 @@ yarn add --dev solidity-bits
 
 ## Projects powered by solidity-bits
 - [erc721psi](https://github.com/estarriolvetch/ERC721Psi)
+- [fpe-map](https://github.com/estarriolvetch/fpe-map)
