@@ -35,7 +35,6 @@ library BitScan {
     function isolateMS1B256(uint256 bb) pure internal returns (uint256) {
         require(bb > 0);
         unchecked {
-            bb |= bb >> 256;
             bb |= bb >> 128;
             bb |= bb >> 64;
             bb |= bb >> 32;
