@@ -11,7 +11,7 @@
     "hardhat": "^2.9.2"
   },
   "name": "solidity-bits",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "index.js",
   "license": "MIT"
 }
