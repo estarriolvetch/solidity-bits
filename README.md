@@ -23,4 +23,4 @@ yarn add --dev solidity-bits
 - [fpe-map](https://github.com/estarriolvetch/fpe-map)
 
 ## Contributor
-- [sillytuna](https://github.com/sillytuna) 
+- [sillytuna](https://github.com/sillytuna): https://github.com/estarriolvetch/solidity-bits/issues/1 
