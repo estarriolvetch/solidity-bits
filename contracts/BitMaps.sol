@@ -165,7 +165,8 @@ library BitMaps {
                 
                 if(bb > 0) {
                     unchecked {
-                        setBitIndex = (bucket << 8) | (255 -  bb.bitScanForward256());    
+                        setBitIndex = (bucket << 8) | (255 -  bb.bitScanForward256());
+                        break;
                     }
                 } 
             }
