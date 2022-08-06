@@ -138,7 +138,7 @@ library BitMaps {
     /**
      * @dev Find the closest index of the set bit before `index`.
      */
-    function scanForward(BitMap storage bitmap, uint256 index) internal view returns (uint256) {
+    function scanForward(BitMap storage bitmap, uint256 index) internal view returns (uint256 setBitIndex) {
         uint256 bucket = index >> 8;
 
         // index within the bucket
@@ -152,7 +152,7 @@ library BitMaps {
         
         if(bb > 0) {
             unchecked {
-                return (bucket << 8) | (bucketIndex -  bb.bitScanForward256());    
+                setBitIndex = (bucket << 8) | (bucketIndex -  bb.bitScanForward256());    
             }
         } else {
             while(true) {
@@ -165,7 +165,7 @@ library BitMaps {
                 
                 if(bb > 0) {
                     unchecked {
-                        return (bucket << 8) | (255 -  bb.bitScanForward256());    
+                        setBitIndex = (bucket << 8) | (255 -  bb.bitScanForward256());    
                     }
                 } 
             }
