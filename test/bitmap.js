@@ -231,6 +231,33 @@ describe('BitMap', function (accounts) {
     });
   });
 
+  describe('popcount', function () {
+
+    it('within a single bucket', async function () {
+      await this.bitmap.setBatch(1, 150);
+ 
+      assert.equal(await this.bitmap.popcountA(1,150), 150);
+      assert.equal(await this.bitmap.popcountA(0,256), 150);
+      assert.equal(await this.bitmap.popcountA(151,256), 0);
+
+      assert.equal(await this.bitmap.popcountB(1,150), 150);
+      assert.equal(await this.bitmap.popcountB(0,256), 150);
+      assert.equal(await this.bitmap.popcountB(151,256), 0);
+    });
+
+    it('across multiple bucket', async function () {
+      await this.bitmap.setBatch(0, 600);
+      await this.bitmap.unsetBatch(10, 512);
+
+      assert.equal(await this.bitmap.popcountA(0,600), 600-512);
+      assert.equal(await this.bitmap.popcountA(10,512), 0);
+
+      assert.equal(await this.bitmap.popcountB(0,600), 600-512);
+      assert.equal(await this.bitmap.popcountB(10,512), 0);
+
+    });
+  });
+
   describe('scan forward', function () {
     it('scanForward the key itself', async function () {
       await this.bitmap.set(keyA);

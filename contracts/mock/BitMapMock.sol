@@ -33,6 +33,14 @@ contract BitMapMock {
         _bitmap.unsetBatch(startIndex, amount);
     }
 
+    function popcountA(uint256 startIndex, uint256 amount) public view returns(uint256) {
+        return _bitmap.popcountA(startIndex, amount);
+    }
+
+    function popcountB(uint256 startIndex, uint256 amount) public view returns(uint256) {
+        return _bitmap.popcountB(startIndex, amount);
+    }
+
     function scanForward(uint256 index) public view returns (uint256) {
         return _bitmap.scanForward(index);
     }
