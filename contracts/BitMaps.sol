@@ -150,11 +150,11 @@ library BitMaps {
         unchecked {
             if(bucketStartIndex + amount < 256) {
                 count +=  Popcount.popcount256A(
-                    bitmap._data[bucket] & (MASK_FULL << (256 - amount) >> bucketStartIndex)
+                    bitmap._data[bucket] << bucketStartIndex >> (256 - amount)
                 );
             } else {
                 count += Popcount.popcount256A(
-                    bitmap._data[bucket] & (MASK_FULL >> bucketStartIndex)
+                    bitmap._data[bucket] << bucketStartIndex
                 );
                 amount -= (256 - bucketStartIndex);
                 bucket++;
@@ -165,7 +165,7 @@ library BitMaps {
                     bucket++;
                 }
                 count += Popcount.popcount256A(
-                    bitmap._data[bucket] & (MASK_FULL << (256 - amount))
+                    bitmap._data[bucket] >> (256 - amount)
                 );
             }
         }
@@ -182,11 +182,11 @@ library BitMaps {
         unchecked {
             if(bucketStartIndex + amount < 256) {
                 count +=  Popcount.popcount256B(
-                    bitmap._data[bucket] & (MASK_FULL << (256 - amount) >> bucketStartIndex)
+                    bitmap._data[bucket] << bucketStartIndex >> (256 - amount)
                 );
             } else {
                 count += Popcount.popcount256B(
-                    bitmap._data[bucket] & (MASK_FULL >> bucketStartIndex)
+                    bitmap._data[bucket] << bucketStartIndex
                 );
                 amount -= (256 - bucketStartIndex);
                 bucket++;
@@ -197,7 +197,7 @@ library BitMaps {
                     bucket++;
                 }
                 count += Popcount.popcount256B(
-                    bitmap._data[bucket] & (MASK_FULL << (256 - amount))
+                    bitmap._data[bucket] >> (256 - amount)
                 );
             }
         }
