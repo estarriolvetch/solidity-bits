@@ -12,6 +12,8 @@
 
  */
 
+/// @dev reference: https://en.wikichip.org/wiki/population_count
+
 pragma solidity ^0.8.0;
 
 library Popcount {
