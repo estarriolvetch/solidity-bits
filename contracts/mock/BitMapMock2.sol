@@ -39,7 +39,6 @@ contract BitMapMock2 {
 
 
     function scanForward(uint256 index) public view returns (uint256) {
-        //return _bitmap.scanForward(index);
-        return 0;
+        return _bitmap.scanForward(index);
     }
 }

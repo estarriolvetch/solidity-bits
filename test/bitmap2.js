@@ -252,7 +252,7 @@ describe('BitMap', function (accounts) {
     });
   });
 
-  describe.skip('scan forward', function () {
+  describe('scan forward', function () {
     it('scanForward the key itself', async function () {
       await this.bitmap.set(keyA);
       await this.bitmap.set(keyB);
