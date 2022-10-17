@@ -54,6 +54,15 @@ contract BitScanMock{
     }
 
 
+    function benchmarklog2(uint256 bb) public returns (uint8) {
+        uint256 gasBefore = gasleft();
+        uint8 r =  BitScan.log2(bb);
+        uint256 gasAfter = gasleft();
+        console.log(gasBefore - gasAfter);
+        return r;
+    }
+
+
 }
 
 

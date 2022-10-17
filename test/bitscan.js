@@ -12,6 +12,10 @@ describe("BitScan", function () {
     await bitscan.deployed();
   });
 
+  it.only("isolateLSB", async function () {
+    await bitscan.benchmarklog2("2134")
+  });
+
   it("isolateLSB", async function () {
     for (let i = 0; i < 256; i++) {
       assert.equal(
