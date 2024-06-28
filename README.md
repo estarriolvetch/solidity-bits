@@ -23,6 +23,7 @@ yarn add --dev solidity-bits
 - [erc1155delta](https://github.com/ctor-lab/ERC1155Delta)
 - [erc721psi](https://github.com/estarriolvetch/ERC721Psi)
 - [fpe-map](https://github.com/estarriolvetch/fpe-map)
+- [erc404b](https://github.com/Black-Eyed-Creatures/ERC404B)
 
 ## Contributor
 - [sillytuna](https://github.com/sillytuna): https://github.com/estarriolvetch/solidity-bits/issues/1 
